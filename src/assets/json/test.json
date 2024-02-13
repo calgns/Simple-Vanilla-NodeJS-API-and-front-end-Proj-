@@ -1,0 +1,20 @@
+{
+  "dev": [
+    {"nome": "SA", "href": "./dev/sa", "disable": true },
+    {"nome": "BR", "href": "./dev/br" },
+    {"nome": "CA", "href": "./dev/ca" }
+  ],
+  
+  "homol": [
+    {"nome": "SA", "href": "./homol/sa"},
+    {"nome": "BR", "href": "./homol/br"},
+    {"nome": "CA", "href": "./homol/ca", "disable": true }
+  ],
+
+  "qlt": [
+    {"nome": "SA", "href": "./qlt/sa" },
+    {"nome": "BR", "href": "./qlt/br", "disable":true },
+    {"nome": "CA", "href": "./qlt/ca" }
+  ]
+  
+}
