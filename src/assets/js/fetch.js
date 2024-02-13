@@ -21,7 +21,7 @@ const dev1 = [
 
 // OBS: next time try PUT or PATCH method if possible.
 // post in json method
-async function postJSON() {
+export async function postJSON() {
   try {
     // parsing data after getting it and modifying
     const res = await fetch(base);
@@ -60,5 +60,21 @@ async function postJSON() {
   }
 }
 
+export const patchJSON = async() => {
+  try {
+    const response = await fetch(url, {
+      method: "PATCH", // or 'PUT' or 'PATCH'
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ dev2: [{ nome: "SA123", href: "./dev/saaaaaaa", disable: null }] }),
+    })
+  
+    const result = await response.json();
+    console.log("Success - patchJSON:", JSON.stringify(result));
+    
+  } catch (error) {
+    console.log("Error catched - patchJSON:", error);
+  }
+}
+
 // const data = { username: "example" };
-postJSON();
+// postJSON();

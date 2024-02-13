@@ -1,4 +1,5 @@
 // import json
+import { patchJSON, postJSON } from "./fetch";
 import data from "/src/assets/json/test.json";
 
 // Setting variables
@@ -47,6 +48,30 @@ check.forEach((_) => {
     console.log(data.dev);
   });
 });
+
+const post = document.querySelector(".post")
+const postbtn = document.createElement("button");
+
+postbtn.setAttribute("class", "postbtn");
+postbtn.innerHTML = "post";
+postbtn.addEventListener("click", () => {
+  postJSON();
+  console.log("post");
+});
+
+post.appendChild(postbtn);
+
+const patch = document.querySelector(".patch")
+const patchbtn = document.createElement("button");
+
+patchbtn.setAttribute("class", "patchbtn");
+patchbtn.innerHTML = "patch";
+patchbtn.addEventListener("click", () => {
+  patchJSON();
+  console.log("patch");
+});
+
+patch.appendChild(patchbtn);
 
 // check.addEventListener('change', (e) => {
 //   includes("nome ") ()=> {

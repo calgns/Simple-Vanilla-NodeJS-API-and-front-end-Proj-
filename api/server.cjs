@@ -3,7 +3,7 @@ var morgan = require('morgan')
 const http = require('http');
 const fs = require('fs');
 const { getCountry, getSortedCountries } = require('./controllers/getRes.cjs');
-const { postTest } = require('./controllers/postRes.cjs');
+const { postTest, patchTest } = require('./controllers/postRes.cjs');
 
 // Setting morgan and  port
 var morganLogger = morgan('dev')
@@ -16,7 +16,7 @@ const server = http.createServer((req, res) => {
 
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080'); // Allow all origins
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST'); // Allow OPTIONS, GET, POST methods
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, PATCH, POST'); // Allow OPTIONS, GET, POST methods
   // res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
   res.setHeader('Access-Control-Allow-Headers', '*'); // Allow Content-Type header
   res.setHeader('Access-Control-Max-Age', '86400'); // Cache preflight response for  24 hours
@@ -73,7 +73,9 @@ const server = http.createServer((req, res) => {
     }
 
     // Handling POST and Handling ROUTES
-    if (req.method === 'POST' && req.url === "/test") return postTest(req, res);
+    if (req.method === 'PATCH' && req.url === "/test") return postTest(req, res);
+
+    if (req.method === 'POST' && req.url === "/test") return patchTest(req, res);
     
     // Handle other methods
     res.writeHead(405);
