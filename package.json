@@ -1,0 +1,28 @@
+{
+  "name": "api-project",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "vite": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "ndm": "nodemon ./api/server.cjs",
+    "dev": "vite ./src/ --port 8080 --strictPort ",
+    "start": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "finalhandler": "^1.2.0",
+    "node": "^21.6.1",
+    "nodemon": "^3.0.3",
+    "vite": "^5.0.12"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
+  }
+}
