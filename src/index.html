@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css" />
+    <link rel="stylesheet" href="/src/assets/index.css" />
+    <title>Document</title>
+    <script type="module" src="/src/assets/js/fetch.js" defer></script>
+    <script type="module" src="/src/assets/js/index.js" defer></script>
+  </head>
+  <body>
+    <h1 style="text-align: center; margin-top: 2rem">Try to make an json and an make it work</h1>
+
+    <main>
+      <section>
+        <div class="form">
+          <div>
+            <h3>Nome</h3>
+            <input id="nome" type="text">
+          </div>
+          <div>
+            <h3>Idade</h3>
+            <input id="idade" type="text">
+          </div>
+          <div>
+            <fieldset>
+              <legend>Selecione o tipo de serviço</legend>
+    
+              <div>
+                <input type="radio" name="serviço" value="Afiliado/funcionario" id="Afiliado">
+                <label for="Afiliado">Afiliado/funcionario</label>
+              </div>
+    
+              <div>
+                <input type="radio" name="serviço" value="PJ/semelhantes" id="PJ">
+                <label for="PJ">PJ/semelhantes</label>
+              </div>
+    
+              <div>
+                <input type="radio" name="serviço" value="Cliente" id="Cliente" checked>
+                <label for="Cliente">Cliente</label>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <pre class="links"></pre>
+
+      </section>
+      
+      <div class="btns">
+        <div class="patch"></div>
+        <div class="post"></div>
+        <div class="submit">
+          <input type="submit" />
+        </div>
+        <div class="random">
+          <button>Random</button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

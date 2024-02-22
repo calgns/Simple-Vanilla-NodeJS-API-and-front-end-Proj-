@@ -1,94 +1,61 @@
-var finalhandler = require('finalhandler')
-var morgan = require('morgan')
-const http = require('http');
-const fs = require('fs');
-const { getCountry, getSortedCountries } = require('./controllers/getRes.cjs');
-const { postTest, patchTest } = require('./controllers/postRes.cjs');
+const express = require('express');
+const morgan = require('morgan');
+// const fs = require('node:fs');
+const path = require('node:path');
 
-// Setting morgan and  port
-var morganLogger = morgan('dev')
-const port = 3000;
+const { getBase, getTest, getCountries, getSortedCountries } = require(path.join(__dirname, 'controllers', 'getRes.cjs'));
+const { postTest, postApiDataBase } = require(path.join(__dirname, 'controllers', 'postRes.cjs'));
 
+const app = express();
 
-// Sets server and manage middlewares
-const server = http.createServer((req, res) => {
-  var done = finalhandler(req, res);
+// Configure Morgan for logging
+app.use(morgan('dev'));
 
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080'); // Allow all origins
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, PATCH, POST'); // Allow OPTIONS, GET, POST methods
-  // res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
-  res.setHeader('Access-Control-Allow-Headers', '*'); // Allow Content-Type header
-  res.setHeader('Access-Control-Max-Age', '86400'); // Cache preflight response for  24 hours
+// Middleware to parse JSON bodies
+app.use(express.json());
 
-  morganLogger(req, res, (err) => {
+// GET route
+app.get('/base', async (req, res) => await getBase(req, res));
+app.get('/test', async (req, res) => await getTest(req, res));
+app.get('/countries', async (req, res) => await getCountries(req, res));
+app.get('/sort/countries', async (req, res) => await getSortedCountries(req, res));
 
-    // handling err
-    if (err) {console.log("finalhandler catch: "); return done(err);}
+// POST route
+app.post('/test', async (req, res) => await postTest(req, res));
 
+app.post('/api/data', async (req, res) => await postApiDataBase(req, res));
 
-    // Handle preflight request
-    if (req.method === 'OPTIONS') {
-      res.writeHead(204);
-      res.end();
-      return;
-    }
-
-    // Handling GET and Handling ROUTES
-    if (req.method === 'GET' && req.url === "/countries") return getCountry(req, res); 
-    
-    if (req.method === 'GET' && req.url === "/sort/countries") return getSortedCountries(req, res); 
-    
-    if (req.method === "GET" && req.url === "/test") {
-      fs.readFile('./api/data/test.json', "utf-8", (err, data) => {
-        if (err) {
-          res.writeHead(500);
-          res.end(JSON.stringify({ error: "Internal - fs server - API Server Error" }));
-        } else {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(data);
-        }
-      });
-      return;
-    }
-
-    if (req.method === "GET" && req.url === "/base") {
-      fs.readFile('./api/data/base.json', "utf-8", (err, data) => {
-        if (err) {
-          res.writeHead(500);
-          res.end(JSON.stringify({ error: "Internal - fs server - API Server Error" }));
-        } else {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(data);
-        }
-      });
-      return;
-    }
-
-    if (req.method === "GET" && req.url === "/log") {
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.write(JSON.stringify(req.headers));
-      res.end("\n\r\tlog request completed!");
-      return;
-    }
-
-    // Handling POST and Handling ROUTES
-    if (req.method === 'PATCH' && req.url === "/test") return postTest(req, res);
-
-    if (req.method === 'POST' && req.url === "/test") return patchTest(req, res);
-    
-    // Handle other methods
-    res.writeHead(405);
-    res.end(`${req.method} is not allowed for the request. (basically, past trough routes handlers)`);
-    
-  })
-});
-
-// Calls server and listens port
-server.listen(port, (err) => {
-  if (err) {
-    return console.log('something bad happened', err)
+// PATCH route
+/* MYSQL
+app.patch('/api/data', async (req, res) => {
+  try {
+    const update = req.body;
+    // const dataPath = "./api/data/test.json";
+    // const data = JSON.parse(await fs.readFile(dataPath, 'utf8'));
+    // Object.assign(data, update);
+    // await fs.writeFile(dataPath, JSON.stringify(data, null,  2));
+    res.send('Data updated');
+  } catch (err) {
+    res.status(500).send('Error updating data');
   }
-  console.log(`Server running at http://localhost:${port}/`);
 });
+*/
 
+// PUT route
+/* MYSQL
+app.put('/api/data', async (req, res) => {
+  try {
+    const data = req.body;
+    await fs.writeFile("./api/data/base.json", JSON.stringify(data, null,  2));
+    res.send('Data replaced');
+  } catch (err) {
+    res.status(500).send('Error replacing data');
+  }
+});
+*/
+
+// Start the server
+const PORT = process.env.PORT ||  3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

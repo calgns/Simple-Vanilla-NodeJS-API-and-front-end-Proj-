@@ -11,12 +11,14 @@
     "preview": "vite preview",
     "ndm": "nodemon ./api/server.cjs",
     "dev": "vite ./src/ --port 8080 --strictPort ",
-    "start": "vite"
+    "vt": "vite"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.7",
+    "express": "^4.18.2",
     "finalhandler": "^1.2.0",
     "node": "^21.6.1",
     "nodemon": "^3.0.3",

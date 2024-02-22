@@ -1,0 +1,34 @@
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section div{
+  width: clamp(200px, 400px, 100%);
+}
+
+
+input[type="text"] {
+  padding: 4px 8px;
+  height: 2rem;
+}
+
+main {
+  padding: 4px 1rem;
+}
+
+.links {
+  background-color: #bbb;
+  border-radius: 12px;
+  min-width: 400px;
+  height: 320px;
+  padding: 2rem 1.125rem;
+  margin: 1rem;
+  color: #000;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-around;
+}

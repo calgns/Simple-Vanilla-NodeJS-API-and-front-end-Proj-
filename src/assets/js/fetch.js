@@ -1,15 +1,3 @@
-const base = "http://localhost:3000/base";
-const url = "http://localhost:3000/test";
-
-// First normal fetch promise.
-fetch(base)
-  .then((res) => res.json())
-  .then((data) => showInfo(data));
-
-const showInfo = (data) => {
-  console.log(data);
-};
-
 
 // Second async/await fetch promise.
 // data modified and ready to be sent in POST request
@@ -32,13 +20,6 @@ export async function postJSON() {
     data.dev = dev1
     console.log("🚀 ~ postJSON ~ data.dev:", data.dev)
     
-
-    // const data = await res.json();
-    // let data;
-    // await fetch(base).then((res) => {
-    //   data = res.json() 
-    //   data.dev = dev1
-    // }).catch((err) => console.log("Error catched - postJSON fetch: ", err));
 
     // debug
     console.log("data.dev - postJSON: ", data);
@@ -76,5 +57,3 @@ export const patchJSON = async() => {
   }
 }
 
-// const data = { username: "example" };
-// postJSON();

@@ -1,9 +1,5 @@
 {
-  "dev2": [
-    {
-      "nome": "SA123",
-      "href": "./dev/saaaaaaa",
-      "disable": null
-    }
-  ]
+  "nome": "José Rouses Belchior",
+  "idade": "42",
+  "servico": "Cliente"
 }
